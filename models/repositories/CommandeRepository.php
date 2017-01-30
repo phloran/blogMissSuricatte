@@ -3,9 +3,7 @@
 class CommandeRepository
 {
 	public function getAll($pdo) {
-		$resultats = $pdo->query('SELECT cp.quantite, p.libelle, c.date_cmd, c.date_expedition FROM commande_produit cp 
-INNER JOIN produit p ON cp.prd_id = p.id
-INNER JOIN commande c ON cp.com_id = c.id');
+		$resultats = $pdo->query('SELECT c.client_id, c.date_cmd, c.date_expedition, c.id, c.ref, c.statut_id FROM commande c');
 
 		$resultats->setFetchMode(PDO::FETCH_OBJ);
 	
@@ -14,10 +12,12 @@ INNER JOIN commande c ON cp.com_id = c.id');
 		while($obj = $resultats->fetch()){	
 
 			$commande = new Commande();
-			$commande->setQuantite($obj->quantite);
-			$commande->setLibelle($obj->libelle);
+			$commande->setClientId($obj->client_id);
 			$commande->setDateCmd($obj->date_cmd);
 			$commande->setDateExp($obj->date_expedition);
+			$commande->setId($obj->id);
+			$commande->setRef($obj->ref);
+			$commande->setStatutId($obj->statut_id);
 
 			$listeCommande[] = $commande;
 
