@@ -5,8 +5,10 @@ include_once('library/PDOFactory.php');
 include_once('models/entities/Personne.php');
 include_once('models/entities/Client.php');
 include_once('models/entities/User.php');
+include_once('models/entities/commande.php');
 include_once('models/repositories/ClientRepository.php');
 include_once('models/repositories/UserRepository.php');
+include_once('models/repositories/CommandeRepository.php');
 
 
 //On récupère un objet PDO une fois pour toutes pour dialoguer avec la bdd
@@ -51,8 +53,8 @@ switch ($action) {
 
 		case "listCommande":
 		//On prépare la vue a afficher avec les données dont elle a besoin
-		$clientRepo = new ClientRepository();
-		$listeCommande = $clientRepo->getAll($pdo);
+		$commandeRepo = new CommandeRepository();
+		$listeCommande = $commandeRepo->getAll($pdo);
 		$vueAAfficher = "views/listCommande.php";
 		break;
 
