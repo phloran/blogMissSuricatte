@@ -28,3 +28,6 @@ INNER JOIN commande c ON cp.com_id = c.id');
 	
 	
 }
+
+
+

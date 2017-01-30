@@ -8,6 +8,7 @@ include_once('models/entities/User.php');
 include_once('models/repositories/ClientRepository.php');
 include_once('models/repositories/UserRepository.php');
 
+
 //On récupère un objet PDO une fois pour toutes pour dialoguer avec la bdd
 $pdo = PDOFactory::getMysqlConnection();
 
@@ -46,6 +47,13 @@ switch ($action) {
 		$_SESSION = array();
 		session_destroy();
 		$vueAAfficher = "views/login.php";
+		break;
+
+		case "listCommande":
+		//On prépare la vue a afficher avec les données dont elle a besoin
+		$clientRepo = new ClientRepository();
+		$listeCommande = $clientRepo->getAll($pdo);
+		$vueAAfficher = "views/listCommande.php";
 		break;
 
 	case "listClient":
